@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f9f2e8">
+  <title>Maaeeenn. ✹ photo dump</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="ticker" aria-label="running text">
+    <div class="ticker-track">BREAKING NEWS: KITA KELUAR RUMAH ✹ bukti-bukti kejadian ✹ no thoughts, just vibes ✹ kapan main lagi??? ✹ BREAKING NEWS: KITA KELUAR RUMAH ✹ bukti-bukti kejadian ✹ no thoughts, just vibes ✹ kapan main lagi??? ✹</div>
+  </div>
+
+  <header class="hero">
+    <div class="hero-top">
+      <span class="sticker sticker-yellow">100% REAL<br>NO SCRIPT</span>
+      <span class="tiny-label">ARSIP KEJADIAN • EST. 20XX</span>
+      <span class="sticker sticker-pink">JANGAN<br>DISEBAR???</span>
+    </div>
+    <p class="eyebrow">a highly unserious archive of</p>
+    <h1>Maaeeenn<span class="period">.</span></h1>
+    <p class="hero-subtitle">foto-foto yang harusnya masuk galeri doang,<br>tapi yaudah kita bikin website sekalian.</p>
+    <div class="hero-buttons">
+      <a class="button button-dark" href="#episodes">PILIH EPISODE ↓</a>
+      <a class="button button-light" href="#guestbook">TINGGALKAN JEJAK ✍️</a>
+    </div>
+    <div class="scribble scribble-one">core memory??</div>
+    <div class="scribble scribble-two">HELP 😭</div>
+  </header>
+
+  <main>
+    <section class="announcement panel">
+      <div class="announcement-icon">⚠️</div>
+      <div>
+        <h2>PERHATIAN, WARGA SIPIL</h2>
+        <p>Konten di bawah mengandung ketawa tidak jelas, foto blur, dan keputusan spontan. Silakan lanjut dengan risiko sendiri.</p>
+      </div>
+      <span class="stamp">CLASSIFIED<br>ISH</span>
+    </section>
+
+    <section id="episodes" class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">archive directory / pilih kejadian</p><h2>SEMUA EPISODE <span class="wiggle">🎞️</span></h2></div>
+        <span class="counter" id="album-counter">0 EPISODE</span>
+      </div>
+      <p class="section-note">Bukan cuma satu hari. Pilih mau mengungkit kejadian yang mana dulu 👀</p>
+      <div class="manager panel" id="manager" hidden>
+        <h3>✹ ADMIN MEMORY MANAGER</h3><p>Edit album dari link publik; semuanya langsung tersimpan online dan terlihat oleh pengunjung.</p>
+        <form id="new-episode-form" class="manager-form">
+          <label>Judul episode <input id="new-title" required maxlength="70" placeholder="contoh: MAIN KE PANTAI"></label>
+          <label>Tanggal <input id="new-date" type="date" required></label>
+          <label>Cerita singkat <input id="new-description" maxlength="180" placeholder="ceritain dikit kejadian hari itu..."></label>
+          <button class="button button-dark" type="submit">+ BUAT EPISODE BARU</button>
+        </form>
+        <div class="manager-bottom"><button id="backup-btn" type="button" class="button button-light">↓ BACKUP DATA EPISODE</button></div>
+        <p id="manager-status" class="manager-status" role="status"></p>
+      </div>
+      <div id="album-grid" class="album-grid"></div>
+    </section>
+
+    <div id="album-detail" class="album-detail" hidden>
+      <nav class="album-nav" aria-label="Navigasi episode">
+        <a href="#episodes" class="button button-light">← SEMUA EPISODE</a>
+        <span id="album-position" class="counter"></span>
+      </nav>
+      <div class="album-banner panel">
+        <p class="eyebrow" id="album-date"></p>
+        <h2 id="album-title"></h2>
+        <p id="album-description"></p>
+      </div>
+      <section id="photo-dump" class="section">
+        <div class="section-heading"><div><p class="eyebrow">folder: <span id="folder-name"></span></p><h2>THE PHOTO DUMP <span class="wiggle">📸</span></h2></div><span class="counter" id="photo-counter">0 BUKTI</span></div>
+        <p class="section-note">Klik foto buat zoom. Setiap episode punya isi dan kenangan yang beda!</p>
+        <div class="upload-zone panel" id="upload-zone" hidden><label class="button button-pink upload-label">+ UPLOAD FOTO KE EPISODE INI<input type="file" id="upload-input" accept="image/*" multiple hidden></label><p>Hanya admin yang bisa upload. Foto otomatis muncul untuk semua pengunjung.</p><p id="upload-status" role="status"></p></div><div id="photo-grid" class="photo-grid"></div>
+      </section>
+      <section class="soundtrack panel">
+        <div class="soundtrack-art" aria-hidden="true"><span>♫</span><span>♪</span><span>♫</span></div>
+        <div class="soundtrack-copy">
+          <p class="eyebrow">officially unofficial soundtrack</p>
+          <h2>THE SONG THAT GETS IT.</h2>
+          <p id="song-caption"></p>
+          <audio id="soundtrack" controls preload="none"></audio>
+          <p class="tiny-label" id="song-instruction"></p>
+        </div>
+        <span class="music-doodle">♪♫♪</span>
+      </section>
+      <div class="admin-edit panel" id="album-editor" hidden>
+        <h3>✹ EDIT EPISODE INI</h3>
+        <form id="edit-episode-form" class="manager-form">
+          <label>Judul <input id="edit-title" maxlength="70" required></label>
+          <label>Tanggal / label <input id="edit-date" maxlength="100" required></label>
+          <label>Cerita <input id="edit-description" maxlength="300"></label>
+          <label>Caption soundtrack <input id="edit-song-caption" maxlength="180"></label>
+          <label>Alamat lagu (URL publik, opsional) <input id="edit-song-url" placeholder="https://..."></label>
+          <label>Atau upload musik sendiri (MP3, OGG, WAV, maks 20MB) <input id="song-input" type="file" accept="audio/mpeg,audio/ogg,audio/wav,audio/x-wav"></label>
+          <button class="button button-dark" type="submit">SIMPAN PERUBAHAN</button>
+        </form>
+        <button class="button button-light" id="delete-episode" type="button">HAPUS EPISODE INI</button>
+        <p id="edit-status" role="status"></p>
+        <p class="section-note">Untuk edit caption foto, klik tombol EDIT CAPTION di bawah foto.</p>
+      </div>
+      <div class="album-next" id="album-next"></div>
+    </div>
+
+    <section id="guestbook" class="section guestbook-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">say it with your chest (anonymously)</p>
+          <h2>ANON ZONE <span>🫵</span></h2>
+        </div>
+        <span class="counter">NO NAME, NO PRESSURE</span>
+      </div>
+      <div class="guestbook-layout">
+        <form id="comment-form" class="comment-form panel">
+          <label for="comment-name">Nama samaran (opsional, ngarang aja)</label>
+          <input id="comment-name" maxlength="24" placeholder="misal: cicak berhelm">
+          <label for="comment-text">Tulis pesan / inside joke / ajakan main lagi</label>
+          <textarea id="comment-text" maxlength="500" required placeholder="aku cuma mau bilang..."></textarea>
+          <div class="form-bottom">
+            <span id="char-count">0/500</span>
+            <button class="button button-dark" type="submit" id="submit-comment">KIRIM KE VOID ↗</button>
+          </div>
+          <p class="privacy-note">Komentar tampil tanpa identitas akun. Jangan tulis info pribadi atau hal yang bisa menyakiti orang lain.</p>
+          <p id="form-status" class="form-status" role="status"></p>
+        </form>
+        <div class="comments-panel">
+          <div class="comments-title">
+            <h3>WALL OF YAPPING</h3>
+            <span id="comment-total">0 pesan</span>
+          </div>
+          <div id="comments-list" class="comments-list">
+            <p class="empty-state">Belum ada yang yapping. Jadilah legenda pertama.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="last-call">
+      <span>🧃</span>
+      <div>
+        <h2>OKAY TERUS KAPAN MAIN LAGI?</h2>
+        <p>silakan jawab di anon zone. admin juga manusia yang butuh kepastian.</p>
+      </div>
+      <a href="#guestbook" class="button button-pink">JAWAB SEKARANG</a>
+    </section>
+  </main>
+
+  <section class="admin-access section" id="admin-access">
+    <details id="login-details"><summary>🔒 Login pengelola</summary>
+      <form id="login-form" class="manager-form">
+        <label>Email admin <input id="admin-email" type="email" autocomplete="username" required></label>
+        <label>Password <input id="admin-password" type="password" autocomplete="current-password" required></label>
+        <button type="submit" class="button button-dark">MASUK SEBAGAI ADMIN</button>
+      </form>
+    </details>
+    <div id="admin-session" hidden><strong>✹ MODE ADMIN AKTIF</strong> <button class="button button-light" id="logout-btn" type="button">LOGOUT</button></div>
+    <p id="login-status" role="status"></p>
+  </section>
+  <footer>
+    <span>MAAEEENN. © KORBAN KEADAAN</span>
+    <span>made with 2% planning & 98% spontanitas ✹</span>
+    <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">BALIK KE ATAS ↑</a>
+  </footer>
+
+  <dialog id="lightbox" class="lightbox">
+    <button id="close-lightbox" class="close-lightbox" aria-label="Tutup">✕</button>
+    <img id="lightbox-image" alt="">
+    <p id="lightbox-caption"></p>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
