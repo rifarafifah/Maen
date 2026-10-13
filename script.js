@@ -4,8 +4,9 @@
   Jangan pernah memasukkan secret/service_role key atau password admin ke file publik.
 */
 
-const SUPABASE_URL = "PASTE_SUPABASE_PROJECT_URL_HERE";
-const SUPABASE_ANON_KEY = "PASTE_SUPABASE_ANON_OR_PUBLISHABLE_KEY_HERE";
+const SUPABASE_URL = "https://eipcnpjlagvrlsfooipr.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_rrmxNKHzfucFj7UtqaD1-w_KowddNBX";
+
 
 // TAMBAH / EDIT EPISODE DI SINI. Setiap episode punya foto dan lagu sendiri.
 // Contoh: file: "photos/pantai/foto-1.jpg" berarti foto disimpan di folder photos/pantai/.
